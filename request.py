@@ -6,12 +6,12 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
 }
 
-# response = requests.get('https://pubmed.ncbi.nlm.nih.gov/?term=Artificial+intelligence+identifies+stomach+cancer', headers=headers)
-# soup = BeautifulSoup(response.text, 'lxml')
-# docs = soup.find_all("article", class_="full-docsum")
-# for doc in docs:
-#     name = doc.find("a", class_="docsum-title")["data-article-id"]
-#     print(f'https://pubmed.ncbi.nlm.nih.gov/{name}')
+response = requests.get('https://pubmed.ncbi.nlm.nih.gov/?term=Artificial+intelligence+identifies+stomach+cancer', headers=headers)
+soup = BeautifulSoup(response.text, 'lxml')
+docs = soup.find_all("article", class_="full-docsum")
+for doc in docs:
+    name = doc.find("a", class_="docsum-title")["data-article-id"]
+    print(f'https://pubmed.ncbi.nlm.nih.gov/{name}')
 
 
 # response = requests.get('https://pubmed.ncbi.nlm.nih.gov/34155567/', headers=headers)
