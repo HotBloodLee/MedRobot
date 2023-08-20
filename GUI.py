@@ -76,9 +76,6 @@ class CTk(customtkinter.CTk, TkinterDnD.DnDWrapper):
         self.output_file_button = customtkinter.CTkButton(self, text="开始", command=lambda: self.start())
         self.output_file_button.place(relx=0.25, rely=0.85, relwidth=0.5, relheight=0.1)
 
-        # todo:实现各个ui的功能
-        # todo:实现爬虫的闭环
-
     def args_safe(self) -> bool:
         if not self.country:
             print("none")
@@ -112,8 +109,12 @@ class CTk(customtkinter.CTk, TkinterDnD.DnDWrapper):
 
             medbot = MedBot(output_dir=output_dir, country='China', num=int(num), start_page=int(start_page), end_page=int(end_page), info_label=self.toplevel_window.info_label, handle_label=self.toplevel_window.handle_info_label, num_label=self.toplevel_window.num_info_label)
             robot_thread = threading.Thread(name='t1', target=medbot.search_topics, args=(topics,))
-            self.toplevel_window.focus()
             robot_thread.start()
+            self.toplevel_window.focus()
+            self.wait_window(self.toplevel_window)
+
+            # medbot.search_topics(topics)
+
 
 
     def select_source_path(self, source_path: Optional[str] = None):

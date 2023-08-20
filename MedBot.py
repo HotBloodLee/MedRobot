@@ -2,8 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 import pandas as pd
-from pathlib import Path
-import json
 import time
 
 class MedBot:

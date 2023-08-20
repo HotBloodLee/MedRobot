@@ -4,34 +4,11 @@ from tqdm import tqdm
 import pandas as pd
 from pathlib import Path
 import json
-from pypinyin import pinyin, lazy_pinyin
-from Pinyin2Hanzi import DefaultDagParams
-from Pinyin2Hanzi import dag
 
-'''
-国外：https://pubmed.ncbi.nlm.nih.gov/?term=((artificial%20intelligence)%20AND%20(clinical))&page={i+201}
-国内：https://pubmed.ncbi.nlm.nih.gov/?term=%28%28%28artificial+intelligence%29+AND+%28clinical%29%29%29+AND+%28China%5BAffiliation%5D%29&sort=&page={i+1}
-'''
-
-
-
-# def pinyin_2_hanzi(pinyinList):
-#     dagParams = DefaultDagParams()
-#     # path_num：候选值，可设置一个或多个
-#     result = dag(dagParams, pinyinList, path_num=10, log=True)
-#     if(len(result) > 0):
-#         return True
-#     else:
-#         return False
-#
-# for author_info in tqdm(author_infos):
-#     is_name = True
-#     for n in author_info['name'].lower().split():
-#         if not pinyin_2_hanzi(n):
-#             is_name = False
-#             break
-#     if is_name:
-#         print(author_info)
+# '''
+# 国外：https://pubmed.ncbi.nlm.nih.gov/?term=((artificial%20intelligence)%20AND%20(clinical))&page={i+201}
+# 国内：https://pubmed.ncbi.nlm.nih.gov/?term=%28%28%28artificial+intelligence%29+AND+%28clinical%29%29%29+AND+%28China%5BAffiliation%5D%29&sort=&page={i+1}
+# '''
 
 
 
@@ -41,7 +18,7 @@ headers = {
 articles = list()
 start_url = 'https://pubmed.ncbi.nlm.nih.gov/'
 
-for i in tqdm(range(100)):
+for i in tqdm(range(1)):
     response = requests.get(
                 f'https://pubmed.ncbi.nlm.nih.gov/?term=%28%28%28artificial+intelligence%29+AND+%28clinical%29%29%29+AND+%28China%5BAffiliation%5D%29&sort=&page={i+1}', headers=headers)
     soup = BeautifulSoup(response.text, 'lxml')
@@ -111,6 +88,6 @@ for article in tqdm(articles):
         print(article)
 print(len(author_infos))
 df = pd.DataFrame(author_infos)
-df.to_json(f"author_infos.json", orient="records")
+df.to_json(f"test.json", orient="records")
 
 
